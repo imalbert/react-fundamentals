@@ -1,0 +1,36 @@
+<!-- Creating custom components -->
+<!-- http://localhost:3000/isolated/exercise/04.html -->
+
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@16.13.1/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@16.13.1/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.9.3/babel.js"></script>
+  <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+  <script type="text/babel">
+    const Message = function ({subject, greeting}) {
+      return <div className="message">{`${greeting}, ${subject}`}</div>
+    }
+    const random = <div>random</div>
+    Message.propTypes = {
+      subject: PropTypes.string,
+      greeting: PropTypes.string,
+    }
+
+    const greeting = {greeting: 'Za', subject: 'Warudo!'}
+    const element = (
+      <React.Fragment>
+        // These three calls React.createElement
+        {React.createElement(Message, {greeting: '1', subject: '1'})}
+        <Message {...{greeting: '2', subject: '2'}} />
+        <Message greeting="2" subject="2" />
+        // These two does not call the React.createElement() function. Which is
+        why the "Components" tab do not show these
+        {Message({greeting: '3', subject: '3'})}
+        {random}
+      </React.Fragment>
+    )
+
+    ReactDOM.render(element, document.getElementById('root'))
+  </script>
+</body>
